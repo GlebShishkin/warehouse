@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    image: '879d00f512d7850a3833deb6b7ab9458b524f92f1469b73389caa3b67e9223e4'
+    container_name: appl
+    expose:
+      - '8080'
+    ports:
+      - '8080:8080'
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_URL=jdbc:postgresql://dbl:5432/warehouse
+    depends_on:
+      - db
+  db:
+    image: 'postgres'
+    container_name: dbl
+    expose:
+      - '5432'
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_DB=warehouse
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
